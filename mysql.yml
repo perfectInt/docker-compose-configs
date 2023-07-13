@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  mysql_db:
+    image: mysql
+    command:
+      --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: recipes
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    volumes:
+      - my-db:/var/lib/mysql
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 9000:8081
+
+volumes:
+  my-db:
